@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# fake LLM / permissions テストのおとりファイル。中身は機密を模した文字列なのでコミットしない
+.env
+.env.*
+
+# qwen の実行時状態（設定 .qwen/settings.json だけは追跡する）
+.qwen/*
+!.qwen/settings.json
+
+.DS_Store

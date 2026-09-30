@@ -1,0 +1,39 @@
+{
+  "queue": [
+    "最初のリクエストにはこれを返す",
+    {
+      "content": "2 番目。思考ブロック付き。",
+      "thinking": "ユーザーの意図を確認している…",
+      "chunk_size": 4
+    },
+    {
+      "content": "",
+      "tool_calls": [
+        { "name": "get_weather", "arguments": { "city": "Tokyo", "unit": "c" } }
+      ]
+    },
+    { "status": 429, "error": "rate limit exceeded" }
+  ],
+
+  "rules": [
+    {
+      "match": "天気|weather",
+      "flags": "i",
+      "response": {
+        "content": "",
+        "tool_calls": [{ "name": "get_weather", "arguments": { "city": "Tokyo" } }]
+      }
+    },
+    {
+      "match": "^\\s*(hello|こんにちは)",
+      "flags": "i",
+      "response": "こんにちは。フェイク LLM です。"
+    },
+    {
+      "match": "slow",
+      "response": { "content": "遅い応答", "delay_ms": 2000 }
+    }
+  ],
+
+  "default": "queue も rules も当たらなかったときの応答"
+}
